@@ -24,6 +24,6 @@ tensorflow-estimator
 tensorflow-hub
 tensorflow-text
 tokenizers==0.9.3
-torch==1.7.0
+torch
 transformers==3.5.1
 wordcloud
