@@ -50,7 +50,7 @@ def parse_must_reads(date, msg_body):
                 continue
     return articles
 
-@st.cache(suppress_st_warning=True)
+
 def load_data():
     service = get_service()
     messages = get_data(service, 'MIT Download')
@@ -115,7 +115,7 @@ def preprocess(text_col):
     return text_col
 
 
-@st.cache
+
 def make_wordcloud(df):
     # change the value to black
     def black_color_func(word, font_size, position,orientation,random_state=None, **kwargs):
@@ -136,7 +136,7 @@ def make_wordcloud(df):
     plt.axis("off")
     return fig
 
-@st.cache(allow_output_mutation=True)
+
 def get_topic_model(df):
     text = df['text'].to_list()
     dates = df['date'].apply(lambda x: pd.Timestamp(x))
@@ -144,11 +144,11 @@ def get_topic_model(df):
     topics, _ = topic_model.fit_transform(text)
     return text, dates, topic_model, topics
 
-@st.cache(allow_output_mutation=True)
+
 def get_intertopic_dist_map(topic_model):
     return topic_model.visualize_topics()
 
-@st.cache(allow_output_mutation=True)
+
 def get_topics_over_time(text, topics, dates, topic_model):
     topics_over_time = topic_model.topics_over_time(docs=text, 
                                                     topics=topics, 
@@ -158,7 +158,7 @@ def get_topics_over_time(text, topics, dates, topic_model):
                                                     nr_bins=len(set(dates)) // 7)
     return topic_model.visualize_topics_over_time(topics_over_time, top_n_topics=10)
 
-@st.cache(allow_output_mutation=True)
+
 def get_topic_keyword_barcharts(topic_model):
     return topic_model.visualize_barchart(top_n_topics=9, n_words=5, height=800)
 
